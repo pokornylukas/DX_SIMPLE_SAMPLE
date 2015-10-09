@@ -23,31 +23,43 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetPersonsDS">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPersonsDSResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/WcfService" minOccurs="0" name="GetPersonsDSResult" nillable="true" type="q2:ArrayOfPerson" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="UpdatePerson">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/WcfService" minOccurs="0" name="person" nillable="true" type="q2:Person" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/WcfService" minOccurs="0" name="person" nillable="true" type="q3:Person" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdatePersonResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/WcfService" minOccurs="0" name="UpdatePersonResult" nillable="true" type="q3:DataModificationResult" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/WcfService" minOccurs="0" name="UpdatePersonResult" nillable="true" type="q4:DataModificationResult" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="DeletePerson">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/WcfService" minOccurs="0" name="person" nillable="true" type="q4:Person" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/WcfService" minOccurs="0" name="person" nillable="true" type="q5:Person" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="DeletePersonResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/WcfService" minOccurs="0" name="DeletePersonResult" nillable="true" type="q5:DataModificationResult" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/WcfService" minOccurs="0" name="DeletePersonResult" nillable="true" type="q6:DataModificationResult" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

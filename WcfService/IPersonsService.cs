@@ -17,6 +17,9 @@ namespace WcfService
         List<Person> GetPersons();
 
         [OperationContract]
+        List<Person> GetPersonsDS();
+
+        [OperationContract]
         DataModificationResult UpdatePerson(Person person);
 
         [OperationContract]

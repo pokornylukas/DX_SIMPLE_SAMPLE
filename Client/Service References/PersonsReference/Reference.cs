@@ -213,6 +213,12 @@ namespace Client.PersonsReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonsService/GetPersons", ReplyAction="http://tempuri.org/IPersonsService/GetPersonsResponse")]
         System.Threading.Tasks.Task<Client.PersonsReference.Person[]> GetPersonsAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonsService/GetPersonsDS", ReplyAction="http://tempuri.org/IPersonsService/GetPersonsDSResponse")]
+        Client.PersonsReference.Person[] GetPersonsDS();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonsService/GetPersonsDS", ReplyAction="http://tempuri.org/IPersonsService/GetPersonsDSResponse")]
+        System.Threading.Tasks.Task<Client.PersonsReference.Person[]> GetPersonsDSAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPersonsService/UpdatePerson", ReplyAction="http://tempuri.org/IPersonsService/UpdatePersonResponse")]
         Client.PersonsReference.DataModificationResult UpdatePerson(Client.PersonsReference.Person person);
         
@@ -267,6 +273,14 @@ namespace Client.PersonsReference {
         
         public System.Threading.Tasks.Task<Client.PersonsReference.Person[]> GetPersonsAsync() {
             return base.Channel.GetPersonsAsync();
+        }
+        
+        public Client.PersonsReference.Person[] GetPersonsDS() {
+            return base.Channel.GetPersonsDS();
+        }
+        
+        public System.Threading.Tasks.Task<Client.PersonsReference.Person[]> GetPersonsDSAsync() {
+            return base.Channel.GetPersonsDSAsync();
         }
         
         public Client.PersonsReference.DataModificationResult UpdatePerson(Client.PersonsReference.Person person) {

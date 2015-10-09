@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using EntityFramework.BulkInsert.Extensions;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace WcfService
 {    
@@ -30,12 +32,54 @@ namespace WcfService
             }            
         }
 
+        /// <summary>
+        /// Original solution by EF (data binding costs from client around 9000ms)
+        /// </summary>
+        /// <returns></returns>
         public List<Person> GetPersons()
         {
             using (PraetorTestEntities db = new PraetorTestEntities())
             {
                 return db.Person.ToList();
             }
+        }
+
+        /// <summary>
+        /// Solution using SqlDataReader much faster (data binding costs from client around 3000ms)
+        /// </summary>
+        /// <returns></returns>
+        public List<Person> GetPersonsDS()
+        {
+            List<Person> retval = new List<Person>();
+            SqlConnection connection = new SqlConnection();
+            using (PraetorTestEntities db = new PraetorTestEntities())
+            {
+                connection.ConnectionString = db.Database.Connection.ConnectionString;
+            }
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "SELECT * FROM dbo.Person";
+            cmd.Connection = connection;
+            connection.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    #warning ToDo: Create universal void for filling EF object from reader (Get properties names and datatypes by reflection)
+                    retval.Add(
+                    new Person()
+                    {
+                        Id = Convert.ToInt32(reader["Id"]),
+                        FirstName = reader["FirstName"].ToString(),
+                        LastName = reader["LastName"].ToString(),
+                        BirthDate = Convert.ToDateTime(reader["BirthDate"]),
+                        RowVersion = (byte[])reader["RowVersion"]
+                    });
+                }
+            }
+            reader.Close();
+            connection.Close();          
+            return retval;
         }
 
         public DataModificationResult UpdatePerson(Person person)

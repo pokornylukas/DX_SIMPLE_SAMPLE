@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace Client
 {
@@ -26,12 +27,12 @@ namespace Client
             try
             {
                 MainRibbonControl.Enabled = false;
-                DataLoadingProgressPanel.Visible = true;
+                DataLoadingProgressPanel.Visible = true;              
                 using (PersonsReference.PersonsServiceClient client = new PersonsReference.PersonsServiceClient())
                 {
-                    personBindingSource.DataSource = (await client.GetPersonsAsync()).ToList();
+                    personBindingSource.DataSource = (await client.GetPersonsDSAsync()).ToList();
                     MainGridControl.RefreshDataSource();
-                }
+                }                              
                 MainRibbonControl.Enabled = true;
                 DataLoadingProgressPanel.Visible = false;
                 RefreshDataButtonItem.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
